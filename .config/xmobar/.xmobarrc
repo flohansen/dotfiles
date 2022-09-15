@@ -1,0 +1,39 @@
+-- http://projects.haskell.org/xmobar/
+-- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
+-- you can find weather location codes here: http://weather.noaa.gov/index.html
+
+Config { font    = "xft:monospace:pixelsize=12:antialias=true:hinting=true"
+        , bgColor = "#2E3440"
+        , fgColor = "#E5E9F0"
+        , position = BottomSize C 100 30
+        , lowerOnStart = True
+        , hideOnStart = False
+        , allDesktops = True
+        , persistent = True
+        , iconRoot = "~/.xmonad/xpm/"  -- default: "."
+        , commands =
+
+        [ Run Date "\xf133  %b %d %Y (%H:%M)" "date" 50
+        , Run Wireless "wlp9s0" [ "-t", "\xf1eb  <essid>" ] 10
+        , Run BatteryN ["BAT0"]
+         ["-t", "<acstatus>"
+         , "-S", "Off", "-d", "0", "-m", "3"
+         , "-L", "10", "-H", "90", "-p", "3"
+         , "-W", "0"
+         , "-f", "\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240"
+         , "--"
+         , "-P"
+         , "-a", "notify-send -u critical 'Battery running out!!!!!!'"
+         , "-A", "5"
+         , "-i", "<fn=1>\xf1e6 </fn>"
+         , "-O", "<fn=1><leftbar>  \xf1e6 </fn> <timeleft>"
+         , "-o", "<fn=1><leftbar>  </fn> <timeleft>"
+         , "-H", "10", "-L", "7"
+         ] 50 "batt0"
+        , Run UnsafeStdinReader
+        ]
+
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = " <icon=haskell_20.xpm/> <fc=#3B4252> | </fc> %UnsafeStdinReader% }{ <fc=#3B4252> | </fc> <fc=#D8DEE9>%wlp9s0wi%</fc> <fc=#3B4252> | </fc> <fc=#81A1C1>%date%</fc> <fc=#3B4252> | </fc> <fc=#88C0D0>%batt0%</fc> <fc=#3B4252> | </fc>  "
+}
