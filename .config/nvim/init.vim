@@ -8,6 +8,9 @@ call plug#begin('~/.config/nvim/pack')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-test/vim-test'
     Plug 'projekt0n/github-nvim-theme'
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'doums/darcula'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 syntax on
@@ -17,6 +20,7 @@ set number        " show line numbers
 set expandtab     " replace tabs with spaces
 set tabstop=4     " make one tab be 4 spaces
 set shiftwidth=4  " make one tab be 4 spaces
+set nowrap
 set termguicolors
 
 nmap <leader>rn <Plug>(coc-rename)
@@ -43,14 +47,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " ===== colorscheme
-colorscheme moonlight
-let g:moonlight_italic_comments = 1
-let g:moonlight_italic_keywords = 1
-let g:moonlight_italic_functions = 1
-let g:moonlight_italic_variables = 0
-let g:moonlight_contrast = 1
-let g:moonlight_borders = 0 
-let g:moonlight_disable_background = 0
+colorscheme darcula
 
 " ===== vim-prettier
 let g:prettier#autoformat = 1
@@ -76,5 +73,16 @@ set updatetime=300
 
 lua << EOF
 require'nvim-tree'.setup {
+}
+
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
 }
 EOF

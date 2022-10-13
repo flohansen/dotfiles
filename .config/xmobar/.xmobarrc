@@ -3,8 +3,8 @@
 -- you can find weather location codes here: http://weather.noaa.gov/index.html
 
 Config { font    = "xft:monospace:pixelsize=12:antialias=true:hinting=true"
-        , bgColor = "#2E3440"
-        , fgColor = "#E5E9F0"
+        , bgColor = "#0d1117"
+        , fgColor = "#c6cdd5"
         , position = BottomSize C 100 30
         , lowerOnStart = True
         , hideOnStart = False
@@ -13,7 +13,8 @@ Config { font    = "xft:monospace:pixelsize=12:antialias=true:hinting=true"
         , iconRoot = "~/.xmonad/xpm/"  -- default: "."
         , commands =
 
-        [ Run Date "\xf133  %b %d %Y (%H:%M)" "date" 50
+        [ Run Date "\xf133  %b %d %Y" "date" 50
+        , Run Date "\xf017  %H:%M:%S" "time" 10
         , Run Wireless "wlp9s0" [ "-t", "\xf1eb  <essid>" ] 10
         , Run BatteryN ["BAT0"]
          ["-t", "<acstatus>"
@@ -35,5 +36,5 @@ Config { font    = "xft:monospace:pixelsize=12:antialias=true:hinting=true"
 
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " <icon=haskell_20.xpm/> <fc=#3B4252> | </fc> %UnsafeStdinReader% }{ <fc=#3B4252> | </fc> <fc=#D8DEE9>%wlp9s0wi%</fc> <fc=#3B4252> | </fc> <fc=#81A1C1>%date%</fc> <fc=#3B4252> | </fc> <fc=#88C0D0>%batt0%</fc> <fc=#3B4252> | </fc>  "
+        , template = " <icon=haskell_20.xpm/> <fc=#3B4252> | </fc> %UnsafeStdinReader% }{ <fc=#3B4252> | </fc> <fc=#D8DEE9>%wlp9s0wi%</fc> <fc=#3B4252> | </fc> %date% <fc=#3B4252> | </fc> %time% <fc=#3B4252> | </fc> %batt0% <fc=#3B4252> | </fc>  "
 }
