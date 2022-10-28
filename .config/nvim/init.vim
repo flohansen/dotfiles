@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/pack')
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'tpope/vim-fugitive'
     Plug 'prettier/vim-prettier'
     Plug 'shaunsingh/moonlight.nvim'
@@ -6,10 +7,11 @@ call plug#begin('~/.config/nvim/pack')
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'airblade/vim-gitgutter'
     Plug 'vim-test/vim-test'
     Plug 'projekt0n/github-nvim-theme'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-    Plug 'doums/darcula'
+    Plug 'martinsione/darkplus.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
@@ -47,7 +49,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " ===== colorscheme
-colorscheme darcula
+colorscheme darkplus
 
 " ===== vim-prettier
 let g:prettier#autoformat = 1
