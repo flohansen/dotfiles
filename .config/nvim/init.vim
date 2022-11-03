@@ -13,6 +13,8 @@ call plug#begin('~/.config/nvim/pack')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'martinsione/darkplus.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 call plug#end()
 
 syntax on
@@ -69,6 +71,12 @@ map <C-b> :CtrlPBuffer<cr>
 
 " ===== nvimtree
 map <leader>nn :NvimTreeToggle<cr>
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " ====" ===== coc.nvim
 set updatetime=300
