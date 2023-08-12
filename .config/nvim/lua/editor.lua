@@ -16,11 +16,31 @@ vim.g.airline_powerline_fonts = 1
 vim.g.prettier_autoformat = 1
 vim.g.prettier_autoformat_require_pragma = 0
 
+vim.keymap.set('n', '<leader>a', '<Plug>(coc-codeaction-selected)')
+
 vim.keymap.set('n', '<leader>nn', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)')
 vim.keymap.set('n', '<leader>gd', '<Plug>(coc-rename)')
 vim.keymap.set('n', '<leader>gD', '<Plug>(coc-implementation)')
 vim.keymap.set('n', '<leader>gr', '<Plug>(coc-references)')
+
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+
+vim.keymap.set('n', '<Leader>df', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.frames)
+end)
+
+vim.keymap.set('n', '<Leader>ds', function()
+  local widgets = require('dap.ui.widgets')
+  local sidebar = widgets.sidebar(widgets.scopes)
+  sidebar.open()
+end)
 
 require('nvim-tree').setup {
 }
@@ -40,4 +60,7 @@ require("indent_blankline").setup {
 }
 
 require("lspconfig").pyright.setup {
+}
+
+require("dap-go").setup {
 }
