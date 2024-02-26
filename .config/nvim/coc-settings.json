@@ -1,6 +1,18 @@
 {
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd",
+    "clangd.path": "/usr/bin/clangd",
     "rust-analyzer.inlayHints.typeHints.enable": false,
     "rust-analyzer.inlayHints.parameterHints.enable": false,
-    "rust-analyzer.inlayHints.chainingHints.enable": false
+    "rust-analyzer.inlayHints.chainingHints.enable": false,
+    "languageserver": {
+		"terraform": {
+			"command": "terraform-ls",
+			"args": ["serve"],
+			"filetypes": [
+				"terraform",
+				"tf"
+			],
+			"initializationOptions": {},
+			"settings": {}
+		}
+	}
 }

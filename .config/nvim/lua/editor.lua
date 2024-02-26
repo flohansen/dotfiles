@@ -6,23 +6,28 @@ vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.termguicolors = true
 
-vim.cmd[[colorscheme rose-pine]]
+vim.cmd[[colorscheme catppuccin]]
 vim.cmd[[highlight Normal ctermbg=none guibg=none]]
 vim.cmd[[highlight NormalNC ctermbg=none guibg=none]]
 vim.cmd[[highlight NvimTreeNormal ctermbg=none guibg=none]]
+vim.cmd[[autocmd FileType xml setlocal expandtab tabstop=2 shiftwidth=2]]
 
 vim.g.airline_theme = 'deus'
 vim.g.airline_powerline_fonts = 1
 vim.g.prettier_autoformat = 1
 vim.g.prettier_autoformat_require_pragma = 0
 
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+
 vim.keymap.set('n', '<leader>a', '<Plug>(coc-codeaction-selected)')
 
 vim.keymap.set('n', '<leader>nn', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)')
-vim.keymap.set('n', '<leader>gd', '<Plug>(coc-rename)')
-vim.keymap.set('n', '<leader>gD', '<Plug>(coc-implementation)')
-vim.keymap.set('n', '<leader>gr', '<Plug>(coc-references)')
+vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
+vim.keymap.set('n', 'gD', '<Plug>(coc-implementation)')
+vim.keymap.set('n', 'gr', '<Plug>(coc-references)')
 
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
