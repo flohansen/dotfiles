@@ -11,7 +11,19 @@ return {
   {
     'neovim/nvim-lspconfig',
     config = function()
-      require('lspconfig').rust_analyzer.setup({})
+      require('lspconfig').rust_analyzer.setup({
+        cargo = {
+            buildScripts = {
+                enable = true,
+            },
+        },
+      })
+      require('lspconfig').gopls.setup({})
+      require('lspconfig').bufls.setup({})
+      require('lspconfig').clangd.setup({
+          filetypes = {'c', 'cpp', 'objc', 'cuda'},
+      })
+      require('lspconfig').glslls.setup({})
     end
   },
   {
@@ -24,8 +36,8 @@ return {
     'williamboman/mason-lspconfig.nvim',
     config = function()
       require('mason-lspconfig').setup({
-        ensure_installed = { 'rust_analyzer' },
-	automatic_installation = true,
+        ensure_installed = { 'rust_analyzer', 'gopls', 'clangd', 'bufls' },
+        automatic_installation = true,
       })
     end
   },
@@ -46,7 +58,7 @@ return {
     end
   },
   {
-    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp'
   },
   {
     'nvim-tree/nvim-tree.lua',
@@ -54,7 +66,6 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      vim.keymap.set('n', '<leader>nn', ':NvimTreeToggle<CR>')
       require('nvim-tree').setup()
     end
   },
@@ -62,11 +73,18 @@ return {
     'nvim-telescope/telescope.nvim',
     config = function()
       require('telescope').setup()
-
-      local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-      vim.keymap.set('n', '<leader>.', vim.lsp.buf.code_action)
     end
+  },
+  {
+      'nvim-treesitter/nvim-treesitter'
+  },
+  {
+      'ray-x/go.nvim',
+      config = function()
+          require('go').setup()
+      end,
+      event = {'CmdlineEnter'},
+      ft = {"go", "gomod"},
+      build = ':lua require("go.install").update_all_sync()'
   }
 }
