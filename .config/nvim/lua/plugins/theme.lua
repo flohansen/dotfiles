@@ -3,11 +3,31 @@ return {
   {
       'neovim/nvim-lspconfig',
       config = function()
-          require('nvim-lspconfig').gopls.setup({})
-          require('nvim-lspconfig').clangd.setup({})
+          require('lspconfig').gopls.setup({})
+          require('lspconfig').clangd.setup({})
+          require('lspconfig').terraformls.setup({})
+          require('lspconfig').jsonnet_ls.setup({})
+          require('lspconfig').tsserver.setup({})
       end,
   },
   { 'hrsh7th/cmp-nvim-lsp' },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+        require('lualine').setup()
+    end
+  },
+  {
+    "mellow-theme/mellow.nvim", 
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme mellow]])
+      vim.cmd([[highlight Normal guibg=none]])
+      vim.cmd([[highlight NonText guibg=none]])
+    end
+  },
   {
       'hrsh7th/nvim-cmp',
       config = function()
@@ -45,7 +65,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
       config = function()
           require('nvim-treesitter.configs').setup({
-            ensure_installed = { 'go' },
+            ensure_installed = { 'go', 'terraform', 'jsonnet', 'yaml' },
             highlight = { enable = true },
           })
       end
@@ -56,20 +76,13 @@ return {
           require('go').setup()
       end
   },
-  { 
-      'rose-pine/neovim',
-      priority = 1000,
-      config = function()
-          vim.cmd([[colorscheme rose-pine]])
-      end
-  },
   {
       'williamboman/mason.nvim',
       dependencies = { 'williamboman/mason-lspconfig.nvim' },
       config = function()
           require('mason').setup()
           require('mason-lspconfig').setup({
-            ensure_installed = { 'gopls', 'clangd' },
+            ensure_installed = { 'gopls', 'clangd', 'terraformls', 'jsonnet_ls', 'tsserver' },
             automatic_installation = true,
           })
       end
