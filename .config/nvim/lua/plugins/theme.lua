@@ -24,9 +24,31 @@ return {
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme mellow]])
-      vim.cmd([[highlight Normal guibg=none]])
-      vim.cmd([[highlight NonText guibg=none]])
+      vim.cmd [[
+        highlight Normal guibg=none
+        highlight NormalNC guibg=none
+        highlight NonText guibg=none
+        highlight Normal ctermbg=none
+        highlight NonText ctermbg=none
+      ]]
     end
+  },
+  {
+      "kdheepak/lazygit.nvim",
+      lazy = true,
+      cmd = {
+          "LazyGit",
+          "LazyGitConfig",
+          "LazyGitCurrentFile",
+          "LazyGitFilter",
+          "LazyGitFilterCurrentFile",
+      },
+      dependencies = {
+          "nvim-lua/plenary.nvim",
+      },
+      keys = {
+          { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+      }
   },
   {
       'hrsh7th/nvim-cmp',
