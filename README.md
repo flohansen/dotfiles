@@ -1,5 +1,14 @@
 # Dotfiles
 
+## Font
+The current fontconfig uses [Mononoki Nerd
+Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Mononoki).
+Under Arch you can install this font with
+
+```bash
+sudo pacman -S ttf-mononoki-nerd
+```
+
 ## Checkout
 Put the following line in your `.bashrc` or `.zshrc`
 
