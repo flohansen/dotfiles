@@ -4,13 +4,24 @@ return {
       'neovim/nvim-lspconfig',
       config = function()
           require('lspconfig').gopls.setup({})
-          require('lspconfig').clangd.setup({})
+          require('lspconfig').clangd.setup({
+              filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+          })
           require('lspconfig').terraformls.setup({})
           require('lspconfig').jsonnet_ls.setup({})
           require('lspconfig').tsserver.setup({})
+          require('lspconfig').bufls.setup({})
       end,
   },
   { 'hrsh7th/cmp-nvim-lsp' },
+  { 'akinsho/toggleterm.nvim',
+    version = "*",
+    config = function()
+        require('toggleterm').setup({
+            open_mapping = [[<leader>t]],
+        })
+    end,
+  },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -87,7 +98,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
       config = function()
           require('nvim-treesitter.configs').setup({
-            ensure_installed = { 'go', 'terraform', 'jsonnet', 'yaml' },
+            ensure_installed = { 'go', 'terraform', 'jsonnet', 'yaml', 'proto' },
             highlight = { enable = true },
           })
       end
@@ -104,7 +115,7 @@ return {
       config = function()
           require('mason').setup()
           require('mason-lspconfig').setup({
-            ensure_installed = { 'gopls', 'clangd', 'terraformls', 'jsonnet_ls', 'tsserver' },
+            ensure_installed = { 'gopls', 'clangd', 'terraformls', 'jsonnet_ls', 'tsserver', 'bufls' },
             automatic_installation = true,
           })
       end

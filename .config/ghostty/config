@@ -1,0 +1,4 @@
+background = 161617
+foreground = c9c7cd
+background-opacity = 0.90
+gtk-titlebar = false
