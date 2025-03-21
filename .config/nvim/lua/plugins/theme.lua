@@ -14,14 +14,6 @@ return {
       end,
   },
   { 'hrsh7th/cmp-nvim-lsp' },
-  { 'akinsho/toggleterm.nvim',
-    version = "*",
-    config = function()
-        require('toggleterm').setup({
-            open_mapping = [[<leader>t]],
-        })
-    end,
-  },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
