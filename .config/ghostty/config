@@ -1,4 +1,4 @@
-background = 161617
+background = 282828
 foreground = c9c7cd
-background-opacity = 0.90
+background-opacity = 0.80
 gtk-titlebar = false

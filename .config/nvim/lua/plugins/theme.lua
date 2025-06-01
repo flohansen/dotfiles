@@ -1,16 +1,26 @@
 return {
-  -- Core Plugins
+  { 
+      "morhetz/gruvbox",
+      config = function()
+        vim.g.gruvbox_contrast_dark = 'soft'
+        vim.cmd [[ colorscheme gruvbox ]]
+        vim.cmd [[
+          highlight Normal guibg=none
+          highlight NormalNC guibg=none
+          highlight NonText guibg=none
+          highlight Normal ctermbg=none
+          highlight NonText ctermbg=none
+        ]]
+      end
+  },
   {
       'neovim/nvim-lspconfig',
       config = function()
           require('lspconfig').gopls.setup({})
-          require('lspconfig').clangd.setup({
-              filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-          })
           require('lspconfig').terraformls.setup({})
           require('lspconfig').jsonnet_ls.setup({})
-          require('lspconfig').tsserver.setup({})
-          require('lspconfig').bufls.setup({})
+          require('lspconfig').ts_ls.setup({})
+          require('lspconfig').buf_ls.setup({})
       end,
   },
   { 'hrsh7th/cmp-nvim-lsp' },
@@ -19,21 +29,6 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
         require('lualine').setup()
-    end
-  },
-  {
-    "mellow-theme/mellow.nvim", 
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme mellow]])
-      vim.cmd [[
-        highlight Normal guibg=none
-        highlight NormalNC guibg=none
-        highlight NonText guibg=none
-        highlight Normal ctermbg=none
-        highlight NonText ctermbg=none
-      ]]
     end
   },
   {
@@ -96,18 +91,12 @@ return {
       end
   },
   {
-      'ray-x/go.nvim',
-      config = function()
-          require('go').setup()
-      end
-  },
-  {
       'williamboman/mason.nvim',
       dependencies = { 'williamboman/mason-lspconfig.nvim' },
       config = function()
           require('mason').setup()
           require('mason-lspconfig').setup({
-            ensure_installed = { 'gopls', 'clangd', 'terraformls', 'jsonnet_ls', 'tsserver', 'bufls' },
+            ensure_installed = { 'gopls', 'terraformls', 'jsonnet_ls', 'ts_ls', 'buf_ls' },
             automatic_installation = true,
           })
       end
@@ -120,4 +109,26 @@ return {
           require('guihua.maps').setup()
       end
   },
+  {
+    "ray-x/go.nvim",
+    dependencies = {
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function(lp, opts)
+      require("go").setup({})
+      local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.go",
+        callback = function()
+        require('go.format').goimports()
+        end,
+        group = format_sync_grp,
+      })
+    end,
+    event = {"CmdlineEnter"},
+    ft = {"go", 'gomod'},
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  }
 }

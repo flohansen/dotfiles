@@ -194,6 +194,6 @@ bar {
 
 default_border pixel 2
 gaps inner 20
-exec feh --bg-fill ~/wallpapers/island.jpg
+exec feh --bg-fill ~/wallpapers/current
 exec --no-startup-id picom -b
 exec setxkbmap de
