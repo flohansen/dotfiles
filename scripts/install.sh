@@ -19,8 +19,11 @@ setup_oh_my_zsh() {
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-    if [ ! -d "$OMZ_CUSTOM/themes/catppuccin-git" ]; then
-        git clone --depth=1 https://github.com/catppuccin/oh-my-zsh.git "$OMZ_CUSTOM/themes/catppuccin-git"
+    if [ ! -f "$OMZ_CUSTOM/themes/catppuccin.zsh-theme" ]; then
+        git clone --depth=1 https://github.com/JannoTjarks/catppuccin-zsh.git /tmp/catppuccin-zsh
+        cp -r /tmp/catppuccin-zsh/catppuccin-flavors "$OMZ_CUSTOM/themes/"
+        cp /tmp/catppuccin-zsh/catppuccin.zsh-theme "$OMZ_CUSTOM/themes/"
+        rm -rf /tmp/catppuccin-zsh
     fi
 
     if [ ! -d "$OMZ_CUSTOM/plugins/zsh-autosuggestions" ]; then
