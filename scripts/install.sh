@@ -57,7 +57,7 @@ install_yay() {
 
 install_packages() {
     info "Installing packages..."
-    yay -S --noconfirm direnv neovim greetd greetd-tuigreet wayland waybar wl-clipboard hyprland hyprpaper hyprpolkitagent rofi-wayland mako pipewire pipewire-pulse wireplumber alacritty ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji pavucontrol xdg-desktop-portal-hyprland grim slurp thunar btop openvpn keepassxc nix lazygit docker docker-buildx zsh-autosuggestions zsh-syntax-highlighting brave-bin
+    yay -S --noconfirm direnv neovim uwsm greetd greetd-tuigreet wayland waybar wl-clipboard hyprland hyprpaper hyprpolkitagent rofi-wayland mako pipewire pipewire-pulse wireplumber alacritty ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji pavucontrol xdg-desktop-portal-hyprland grim slurp thunar btop openvpn keepassxc nix lazygit docker docker-buildx zsh-autosuggestions zsh-syntax-highlighting brave-bin
 }
 
 setup_dotfiles() {
