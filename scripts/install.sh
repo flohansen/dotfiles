@@ -52,7 +52,7 @@ install_yay() {
 
     info "Installing yay..."
     git clone https://aur.archlinux.org/yay.git /tmp/yay
-    (cd /tmp/yay && makepkg -si)
+    (cd /tmp/yay && makepkg -s --noconfirm && sudo pacman -U --noconfirm *.pkg.tar.zst)
 }
 
 install_packages() {
