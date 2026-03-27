@@ -11,7 +11,17 @@ return {
       explorer = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
-      picker = { enabled = true },
+      picker = {
+          enabled = true,
+          sources = {
+            files = {
+              exclude = { "node_modules", ".git" },
+            },
+            grep = {
+              exclude = { "node_modules", ".git" },
+            },
+          },
+      },
       notifier = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
@@ -21,6 +31,9 @@ return {
     },
     keys = {
       { "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
+      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Live Grep" },
+      { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     },
   }
 }
